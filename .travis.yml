@@ -6,4 +6,6 @@ before_script:
   - git clone https://github.com/asdf-vm/asdf.git
   - . asdf/asdf.sh
 script:
-  - asdf plugin-test helmsman https://github.com/jkrukoff-cb/asdf-helmsman.git 'helmsman -v'
+  - asdf plugin-install helm
+  - VERSION="$(asdf list-all helm | tail -n 1)" && asdf install helm "${VERSION}" && asdf global helm "${VERSION}"
+  - asdf plugin-test helmsman ./ 'helmsman -v'
